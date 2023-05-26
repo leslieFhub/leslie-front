@@ -23,9 +23,9 @@ import CODOrderScreen from "./screens/CODOrderScreen"
 
 const App = () => {
   return (
-    {Router}
-      {Switch}
-        Route path="/" component={HomeScreen} exact />
+    <Router>
+      <Switch>
+        <Route path="/" component={HomeScreen} exact />
         <Route path="/pizza" component={HomeScreen} exact />
         <Route path="/search/:keyword" component={HomeScreen} exact />
         <Route path="/page/:pagenumber" component={HomeScreen} exact />
@@ -48,8 +48,8 @@ const App = () => {
         <PrivateRouter path="/order/:id" component={OrderScreen} />
         <PrivateRouter path="/orderCOD/:id" component={CODOrderScreen} />
         <Route path="*" component={NotFound} />
-          {/Switch}
-           {/Router}
+      </Switch>
+    </Router>
   );
 };
 
