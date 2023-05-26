@@ -1,7 +1,4 @@
 import React from "react";
-import "./App.css";
-import "./responsive.css";
-import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import SingleProduct from "./screens/SingleProduct";
@@ -18,8 +15,7 @@ import NotFound from "./screens/NotFound";
 import PrivateRouter from "./PrivateRouter";
 import About from "./screens/About";
 import Faqs from "./screens/Faqs";
-import CODOrderScreen from "./screens/CODOrderScreen"
-
+import CODOrderScreen from "./screens/CODOrderScreen";
 
 const App = () => {
   return (
