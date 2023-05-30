@@ -22,7 +22,7 @@ const About = () => {
               </button>
             </h2>
           </div>
-          <div id="answer1" class="collapse show" aria-labelledby="question1" data-parent="#faqAccordion">
+          <div id="answer1" class="collapse" aria-labelledby="question1" data-parent="#faqAccordion">
             <div class="card-body">
             Yes, and we're available from <b>1:00 PM to 12:00 AM</b> every day.
             </div>
