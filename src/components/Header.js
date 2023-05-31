@@ -25,6 +25,11 @@ const Header = () => {
       history.push("/");
     }
   };
+
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
   return (
     <div>
       {/* Top Header */}
@@ -32,7 +37,7 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
-            <Link to="/about">
+              <Link to="/about">
                 <p>ABOUT</p>
               </Link>
               <Link to="/faq">
@@ -55,7 +60,7 @@ const Header = () => {
             <div className="container ">
               <div className="row ">
                 <div className="col-6 d-flex align-items-center">
-                  <Link className="navbar-brand" to="/">
+                  <Link className="navbar-brand" to="/" onClick={refreshPage}>
                     <img alt="logo" src="/images/LESLIES_PIZZA_FOODHUB.png" />
                   </Link>
                 </div>
@@ -69,7 +74,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <i class="fas fa-user"></i>
+                        <i className="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/profile">
@@ -94,7 +99,7 @@ const Header = () => {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        <i class="fas fa-user"></i>
+                        <i className="fas fa-user"></i>
                       </button>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item" to="/login">
@@ -134,7 +139,11 @@ const Header = () => {
           <div className="pc-header">
             <div className="row">
               <div className="col-md-3 col-4 d-flex align-items-center">
-                <Link className="navbar-brand" to="/">
+                <Link
+                  className="navbar-brand"
+                  to="/"
+                  onClick={refreshPage}
+                >
                   <img alt="logo" src="/images/LESLIES_PIZZA_FOODHUB.png" />
                 </Link>
               </div>
@@ -193,9 +202,6 @@ const Header = () => {
           </div>
         </div>
       </div>
- 
-        
-   
     </div>
   );
 };
