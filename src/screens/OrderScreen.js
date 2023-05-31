@@ -171,7 +171,7 @@ const OrderScreen = ({ match }) => {
                           </div>
                           <div className="col-md-5 col-6 d-flex align-items-center">
                             <Link to={`/products/${item.product}`}>
-                              <h6>{item.name}</h6>
+                              <h6><b>{item.name}</b></h6>
                             </Link>
                           </div>
                           <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
@@ -204,7 +204,7 @@ const OrderScreen = ({ match }) => {
                       <h6><b>Shipping</b></h6>
                     </div>
                     <div className="col-md-6">
-                      <h6>Php {order.shippingPrice}</h6>
+                      <h6>Php {order.shippingPrice.toFixed(2)}</h6>
                     </div>
                   </div>
                   <hr />
@@ -213,7 +213,7 @@ const OrderScreen = ({ match }) => {
                       <h6><b>Tax</b></h6>
                     </div>
                     <div className="col-md-6">
-                      <h6>Php {order.taxPrice}</h6>
+                      <h6>Php {order.taxPrice.toFixed(2)}</h6>
                     </div>
                   </div>
                   <hr />
@@ -222,7 +222,7 @@ const OrderScreen = ({ match }) => {
                       <h6><b>Total</b></h6>
                     </div>
                     <div className="col-md-6">
-                      <h6>Php {order.totalPrice}</h6>
+                      <h6>Php {order.totalPrice.toFixed(2)}</h6>
                     </div>
                   </div>
                   <hr />
@@ -245,7 +245,7 @@ const OrderScreen = ({ match }) => {
                             </div>
                             <div className="col-md-5 col-6 d-flex align-items-center">
                               <Link to={`/products/${item.product}`}>
-                                <h6>{item.name}</h6>
+                                <h6><b>{item.name}</b></h6>
                               </Link>
                             </div>
                             <div className="mt-3 mt-md-0 col-md-2 col-6  d-flex align-items-center flex-column justify-content-center ">
@@ -280,7 +280,7 @@ const OrderScreen = ({ match }) => {
                         <h6><b>Shipping</b></h6>
                       </div>
                       <div className="col-md-6">
-                        <h6>Php {order.shippingPrice}</h6>
+                        <h6>Php {order.shippingPrice.toFixed(2)}</h6>
                       </div>
                     </div>
                     <hr />
@@ -289,7 +289,7 @@ const OrderScreen = ({ match }) => {
                         <h6><b>Tax</b></h6>
                       </div>
                       <div className="col-md-6">
-                        <h6>Php {order.taxPrice}</h6>
+                        <h6>Php {order.taxPrice.toFixed(2)}</h6>
                       </div>
                     </div>
                     <hr />
@@ -298,7 +298,7 @@ const OrderScreen = ({ match }) => {
                         <h6><b>Total</b></h6>
                       </div>
                       <div className="col-md-6">
-                        <h6><b>Php {order.totalPrice}</b></h6>
+                        <h6><b>Php {order.totalPrice.toFixed(2)}</b></h6>
                       </div>
                     </div>
                     <hr />
