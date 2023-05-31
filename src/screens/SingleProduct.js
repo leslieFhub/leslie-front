@@ -42,17 +42,7 @@ const SingleProduct = ({ history, match }) => {
     dispatch(listProductDetails(productId));
   }, [dispatch, productId, successCreateReview]);
 
-  useEffect(() => {
-    dispatch(listProductDetails(productId));
-  
-    const urlParams = new URLSearchParams(window.location.search);
-    const qtyParam = urlParams.get('qty');
-    const stocksRemainingParam = urlParams.get('stocksRemaining');
-    if (qtyParam && stocksRemainingParam) {
-      setQty(Number(qtyParam));
-      setStocksRemaining(Number(stocksRemainingParam));
-    }
-  }, [dispatch, productId]);
+ 
   
 
   const AddToCartHandle = (e) => {
