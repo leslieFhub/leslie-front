@@ -16,7 +16,7 @@ const SingleProduct = ({ history, match }) => {
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  const [stocksRemaining, setStocksRemaining] = useState(0); 
+
 
   const productId = match.params.id;
   const dispatch = useDispatch();
