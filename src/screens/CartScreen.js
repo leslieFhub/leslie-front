@@ -43,7 +43,7 @@ const CartScreen = ({ match, location, history }) => {
                 fontSize: "12px",
               }}
             >
-              SHOPPING NOW
+              ORDER NOW
             </Link>
           </div>
         ) : (
