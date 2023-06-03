@@ -11,6 +11,7 @@ const Register = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   const dispatch = useDispatch();
   const redirect = location.search ? location.search.split("=")[1] : "/";
@@ -26,7 +27,7 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    dispatch(register(name, email, password, phone));
   };
 
   return (
@@ -62,12 +63,20 @@ const Register = ({ location, history }) => {
             Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)
           </span>
 
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+
           <button type="submit">Register</button>
           <p>
-          <Link to={redirect ? `/login?redirect=Php{redirect}` : "/login"}>
-              I Have Account <strong>Login</strong>
+            <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+              Do you have an account? <span><u>Login</u></span>
             </Link>
           </p>
+
         </form>
       </div>
     </>
