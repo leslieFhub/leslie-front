@@ -26,14 +26,10 @@ const Header = () => {
     }
   };
 
-  const refreshPage = () => {
-    window.location.reload();
-  };
-
   return (
     <div>
       {/* Top Header */}
-      <div className="Announcement ">
+      <div className="Announcement">
         <div className="container">
           <div className="row">
             <div className="col-md-6 d-flex align-items-center display-none">
@@ -60,7 +56,13 @@ const Header = () => {
             <div className="container ">
               <div className="row ">
                 <div className="col-6 d-flex align-items-center">
-                  <Link className="navbar-brand" to="/" onClick={refreshPage}>
+                  <Link
+                    className="navbar-brand"
+                    to="/"
+                    onClick={() => {
+                      window.location.href = "/";
+                    }}
+                  >
                     <img alt="logo" src="/images/LESLIES_PIZZA_FOODHUB.png" />
                   </Link>
                 </div>
@@ -142,7 +144,9 @@ const Header = () => {
                 <Link
                   className="navbar-brand"
                   to="/"
-                  onClick={refreshPage}
+                  onClick={() => {
+                    window.location.href = "/";
+                  }}
                 >
                   <img alt="logo" src="/images/LESLIES_PIZZA_FOODHUB.png" />
                 </Link>
