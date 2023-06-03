@@ -5,6 +5,10 @@ import Message from "../components/LoadingError/Error";
 import Loading from "../components/LoadingError/Loading";
 import { register } from "../Redux/Actions/userActions";
 import Header from "./../components/Header";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { isValidPhoneNumber } from "react-phone-input-2";
+
 
 const Register = ({ location, history }) => {
   window.scrollTo(0, 0);
@@ -27,6 +31,12 @@ const Register = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!phone || phone.trim() === "") {
+      // Phone number is empty, display an error message or handle the validation as needed
+      return;
+    }
+
     dispatch(register(name, email, password, phone));
   };
 
@@ -40,18 +50,29 @@ const Register = ({ location, history }) => {
         <form className="Login col-md-8 col-lg-4 col-11" onSubmit={submitHandler}>
           <input
             type="text"
+            className="form-control mb-3"
             placeholder="Username"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <PhoneInput
+            country={"ph"}
+            value={phone}
+            onChange={(value) => setPhone(value)}
+            placeholder="Phone Number"
+            inputStyle={{ width: "100%" }}
+            containerStyle={{ marginBottom: "15px" }}
+          />
           <input
             type="email"
+            className="form-control mb-3"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
+            className="form-control mb-3"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -63,20 +84,12 @@ const Register = ({ location, history }) => {
             Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)
           </span>
 
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-
-          <button type="submit">Register</button>
+          <button type="submit" className="btn btn-primary">Register</button>
           <p>
             <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
               Do you have an account? <span><u>Login</u></span>
             </Link>
           </p>
-
         </form>
       </div>
     </>
