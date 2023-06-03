@@ -35,14 +35,14 @@ const About = () => {
               <div className="carousel-inner">
                 <div className="carousel-item active">
                   <img
-                    src="./images/lesliespic1.jpg"
+                    src="./images/5.jpg"
                     alt="Pizza shop"
                     className="d-block w-100"
                   />
                 </div>
                 <div className="carousel-item">
                   <img
-                    src="./images/lesliepic2.jpg"
+                    src="./images/6.jpg"
                     alt="Pizza shop"
                     className="d-block w-100"
                   />
@@ -123,7 +123,7 @@ const About = () => {
               <div className="row">
                 <div className="col-md-3">
                   <img
-                    src="./images/eilsel.jpg"
+                    src="./images/4.jpg"
                     alt="Team member 1"
                     className="img-thumbnail same-size-img"
                   />
@@ -133,7 +133,7 @@ const About = () => {
 
                 <div className="col-md-3">
                   <img
-                    src="./images/leslie.jpg"
+                    src="./images/leslie-1.jpg"
                     alt="Team member 2"
                     className="img-thumbnail same-size-img"
                   />
@@ -143,7 +143,7 @@ const About = () => {
 
                 <div className="col-md-3">
                   <img
-                    src="./images/angeline.jpg"
+                    src="./images/3.jpg"
                     alt="Team member 3"
                     className="img-thumbnail same-size-img"
                   />
@@ -153,11 +153,11 @@ const About = () => {
 
                 <div className="col-md-3">
                   <img
-                    src="./images/geline.jpg"
+                    src="./images/geline-1.jpg"
                     alt="Team member 4"
                     className="img-thumbnail same-size-img"
                   />
-                  <h4 className="h4-head">Caro, Geline Liesel O.</h4>
+                  <h4 className="h4-head">Caro, Geline O.</h4>
                   <p>Chef</p>
                 </div>
               </div>
