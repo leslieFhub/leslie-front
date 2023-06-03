@@ -54,6 +54,18 @@ const PlaceOrderScreen = ({ history }) => {
     );
   };
 
+  const phoneNumberFormatter = (phoneNumber) => {
+    // Format the phone number based on your desired format
+    // For example, "+63 998 171 5899"
+    // You can customize this function according to your formatting requirements
+    const countryCode = phoneNumber.substring(0, 2);
+    const firstPart = phoneNumber.substring(2, 5);
+    const secondPart = phoneNumber.substring(5, 8);
+    const thirdPart = phoneNumber.substring(8);
+
+    return `+${countryCode} ${firstPart} ${secondPart} ${thirdPart}`;
+  };
+
   return (
     <>
       <Header />
@@ -63,7 +75,7 @@ const PlaceOrderScreen = ({ history }) => {
             <div className="row ">
               <div className="col-md-4 center">
                 <div className="alert-success order-box">
-                  <i class="fas fa-user"></i>
+                  <i className="fas fa-user"></i>
                 </div>
               </div>
               <div className="col-md-8 center">
@@ -72,6 +84,9 @@ const PlaceOrderScreen = ({ history }) => {
                 </h5>
                 <p>{userInfo.name}</p>
                 <p>{userInfo.email}</p>
+                {userInfo.phone && (
+                  <p>{phoneNumberFormatter(userInfo.phone)}</p>
+                )}
               </div>
             </div>
           </div>
@@ -87,8 +102,12 @@ const PlaceOrderScreen = ({ history }) => {
                 <h5>
                   <strong>Order info</strong>
                 </h5>
-                <p><b>Shipping:</b> {cart.shippingAddress.brgy}</p>
-                <p><b>Payment method:</b> {cart.paymentMethod}</p>
+                <p>
+                  <b>Shipping:</b> {cart.shippingAddress.brgy}
+                </p>
+                <p>
+                  <b>Payment method:</b> {cart.paymentMethod}
+                </p>
               </div>
             </div>
           </div>
@@ -105,9 +124,9 @@ const PlaceOrderScreen = ({ history }) => {
                   <strong>Deliver to</strong>
                 </h5>
                 <p>
-                  <b>Address:</b>  {cart.shippingAddress.address},{" "}
+                  <b>Address:</b> {cart.shippingAddress.address},{" "}
                   {cart.shippingAddress.brgy},{" "}
-                  {cart.shippingAddress.city} city,{" "} 
+                  {cart.shippingAddress.city} city,{" "}
                   {cart.shippingAddress.postalCode}
                 </p>
               </div>
@@ -160,12 +179,7 @@ const PlaceOrderScreen = ({ history }) => {
                   </td>
                   <td>Php {cart.shippingPrice}</td>
                 </tr>
-                <tr>
-                  <td>
-                    <strong>Tax</strong>
-                  </td>
-                  <td>Php {cart.taxPrice}</td>
-                </tr>
+               
                 <tr>
                   <td>
                     <strong>Total</strong>
