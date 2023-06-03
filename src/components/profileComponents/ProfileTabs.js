@@ -11,6 +11,7 @@ const ProfileTabs = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState(""); // Added phone state
   const toastId = React.useRef(null);
 
   const Toastobjects = {
@@ -32,6 +33,7 @@ const ProfileTabs = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setPhone(user.phone); // Set phone state with the user's phone number
     }
   }, [dispatch, user]);
 
@@ -43,12 +45,13 @@ const ProfileTabs = () => {
         toastId.current = toast.error("Password does not match", Toastobjects);
       }
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, name, email, phone, password }));
       if (!toast.isActive(toastId.current)) {
         toastId.current = toast.success("Profile Updated", Toastobjects);
       }
     }
   };
+
   return (
     <>
       <Toast />
@@ -58,7 +61,7 @@ const ProfileTabs = () => {
       <form className="row  form-container" onSubmit={submitHandler}>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-fn">UserName</label>
+            <label htmlFor="account-fn">Username</label>
             <input
               className="form-control"
               type="text"
@@ -71,13 +74,25 @@ const ProfileTabs = () => {
 
         <div className="col-md-6">
           <div className="form">
-            <label for="account-email">E-mail Address</label>
+            <label htmlFor="account-email">E-mail Address</label>
             <input
               className="form-control"
               type="email"
               value={email}
               required
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form">
+            <label htmlFor="account-phone">Phone Number</label>
+            <input
+              className="form-control"
+              type="text"
+              value={phone}
+              required
+              onChange={(e) => setPhone(e.target.value)}
             />
           </div>
         </div>
@@ -91,15 +106,16 @@ const ProfileTabs = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               minLength={8}
-              required
               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
             />
-            <small>Password must contain at least 8 characters including one uppercase letter, one lowercase letter, one number and one special character.</small>
+            <small>
+              Password must contain at least 8 characters including one uppercase letter, one lowercase letter, one number, and one special character.
+            </small>
           </div>
         </div>
         <div className="col-md-6">
           <div className="form">
-            <label for="account-confirm-pass">Confirm Password</label>
+            <label htmlFor="account-confirm-pass">Confirm Password</label>
             <input
               className="form-control"
               type="password"
