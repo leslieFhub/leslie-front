@@ -7,7 +7,6 @@ import { register } from "../Redux/Actions/userActions";
 import Header from "./../components/Header";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { isValidPhoneNumber } from "react-phone-input-2";
 
 
 const Register = ({ location, history }) => {
