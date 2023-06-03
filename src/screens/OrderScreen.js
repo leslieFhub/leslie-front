@@ -83,10 +83,13 @@ const OrderScreen = ({ match }) => {
                     </h5>
                     <p>{order.user.name}</p>
                     <p>
-                      <a href={`mailto:${order.user.email}`}>
-                        {order.user.email}
-                      </a>
+                      <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
                     </p>
+                    {order.user.phone && (
+                      <div>
+                        <strong>Phone:</strong> {order.user.phone}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
