@@ -61,7 +61,7 @@ const Orders = (props) => {
                           ? moment(order.paidAt).calendar()
                           : moment(order.createdAt).calendar()}
                       </td>
-                      <td>Php {order.totalPrice}</td>
+                      <td>Php {order.totalPrice.toFixed(2)}</td>
                       
                     </tr>
                   ))}
