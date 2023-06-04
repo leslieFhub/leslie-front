@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./../components/Header";
-import Rating from "../components/homeComponents/Rating";
 import { PayPalButton } from "react-paypal-button-v2";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails, payOrder } from "../Redux/Actions/OrderActions";
@@ -10,34 +9,18 @@ import Message from "./../components/LoadingError/Error";
 import moment from "moment";
 import axios from "axios";
 import { ORDER_PAY_RESET } from "../Redux/Constants/OrderConstants";
-import { PRODUCT_CREATE_REVIEW_RESET } from "../Redux/Constants/ProductConstants";
-import {
-  createProductReview,
-  listProductDetails,
-} from "../Redux/Actions/ProductActions";
 
 const OrderScreen = ({ match }) => {
   window.scrollTo(0, 0);
   const [sdkReady, setSdkReady] = useState(false);
   const orderId = match.params.id;
   const dispatch = useDispatch();
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
-  const productDetails = useSelector((state) => state.productDetails);
-    const { product } = productDetails;
-  const productId = match.params.id;
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
-  const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const {
-    loading: loadingCreateReview,
-    error: errorCreateReview,
-    success: successCreateReview,
-  } = productReviewCreate;
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+
   if (!loading) {
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
@@ -76,27 +59,6 @@ const OrderScreen = ({ match }) => {
     dispatch(payOrder(orderId, paymentResult));
   };
 
-  useEffect(() => {
-    if (successCreateReview) {
-      alert("Review Submitted");
-      setRating(0);
-      setComment("");
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
-    }
-    dispatch(listProductDetails(productId));
-  }, [dispatch, productId, successCreateReview]);
-
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      createProductReview(productId, {
-        rating,
-        comment,
-      })
-    );
-  };
-
   return (
     <>
       <Header />
@@ -121,13 +83,10 @@ const OrderScreen = ({ match }) => {
                     </h5>
                     <p>{order.user.name}</p>
                     <p>
-                      <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
+                      <a href={`mailto:${order.user.email}`}>
+                        {order.user.email}
+                      </a>
                     </p>
-                    {order.user.phone && (
-                      <div>
-                        <strong>Phone:</strong> {order.user.phone}
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
@@ -221,7 +180,7 @@ const OrderScreen = ({ match }) => {
                           </div>
                           <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                             <h4>SUBTOTAL</h4>
-                            <h6><b>Php {item.price * item.qty.toFixed(2)}</b></h6>
+                            <h6><b>Php {item.price * item.qty}</b></h6>
                           </div>
                         </div>
                       ))}
@@ -246,6 +205,15 @@ const OrderScreen = ({ match }) => {
                     </div>
                     <div className="col-md-6">
                       <h6>Php {order.shippingPrice.toFixed(2)}</h6>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="row">
+                    <div className="col-md-6">
+                      <h6><b>Tax</b></h6>
+                    </div>
+                    <div className="col-md-6">
+                      <h6>Php {order.taxPrice.toFixed(2)}</h6>
                     </div>
                   </div>
                   <hr />
@@ -286,7 +254,7 @@ const OrderScreen = ({ match }) => {
                             </div>
                             <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                               <h4>SUBTOTAL</h4>
-                              <h6><b>Php {item.price * item.qty.toFixed(2)}</b></h6>
+                              <h6><b>Php {item.price * item.qty}</b></h6>
                             </div>
                           </div>
                         ))}
@@ -313,6 +281,15 @@ const OrderScreen = ({ match }) => {
                       </div>
                       <div className="col-md-6">
                         <h6>Php {order.shippingPrice.toFixed(2)}</h6>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-md-6">
+                        <h6><b>Tax</b></h6>
+                      </div>
+                      <div className="col-md-6">
+                        <h6>Php {order.taxPrice.toFixed(2)}</h6>
                       </div>
                     </div>
                     <hr />
@@ -359,85 +336,6 @@ const OrderScreen = ({ match }) => {
                   </div>
 
                 </div>
-
-                <div className="row my-5">
-              <div className="col-md-6">
-                <h6 className="mb-3">REVIEWS</h6>
-                {product.reviews.length === 0 && (
-                  <Message variant={"alert-info mt-3"}>No Reviews</Message>
-                )}
-                {product.reviews.map((review) => (
-                  <div
-                    key={review._id}
-                    className="mb-5 mb-md-3 bg-light p-3 shadow-sm rounded"
-                  >
-                    <strong>{review.name}</strong>
-                    <Rating value={review.rating} />
-                    <span>{moment(review.createdAt).calendar()}</span>
-                    <div className="alert alert-info mt-3">
-                      {review.comment}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="col-md-6">
-                <h6>WRITE A CUSTOMER REVIEW</h6>
-                <div className="my-4">
-                  {loadingCreateReview && <Loading />}
-                  {errorCreateReview && (
-                    <Message variant="alert-danger">
-                      {errorCreateReview}
-                    </Message>
-                  )}
-                </div>
-                {userInfo ? (
-                  <form onSubmit={submitHandler}>
-                    <div className="my-4">
-                      <strong>Rating</strong>
-                      <select
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                        className="col-12 bg-light p-3 mt-2 border-0 rounded"
-                      >
-                        <option value="">Select...</option>
-                        <option value="1">1 - Poor</option>
-                        <option value="2">2 - Fair</option>
-                        <option value="3">3 - Good</option>
-                        <option value="4">4 - Very Good</option>
-                        <option value="5">5 - Excellent</option>
-                      </select>
-                    </div>
-                    <div className="my-4">
-                      <strong>Comment</strong>
-                      <textarea
-                        row="3"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        className="col-12 bg-light p-3 mt-2 border-0 rounded"
-                      ></textarea>
-                    </div>
-                    <div className="my-3">
-                      <button
-                        disabled={loadingCreateReview}
-                        className="col-12 bg-black border-0 p-3 rounded text-white"
-                      >
-                        SUBMIT
-                      </button>
-                    </div>
-                  </form>
-                ) : (
-                  <div className="my-3">
-                    <Message variant={"alert-warning"}>
-                      Please{" "}
-                      <Link to="/login">
-                        " <strong>Login</strong> "
-                      </Link>{" "}
-                      to write a review{" "}
-                    </Message>
-                  </div>
-                )}
-              </div>
-            </div>
               </>
             )}
           </>
